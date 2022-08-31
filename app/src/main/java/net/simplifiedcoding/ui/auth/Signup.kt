@@ -2,6 +2,7 @@ package net.simplifiedcoding.ui.auth
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.wrapContentSize
@@ -17,13 +18,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import net.simplifiedcoding.R
+import net.simplifiedcoding.navigation.ROUTE_LOGIN
+import net.simplifiedcoding.navigation.ROUTE_SIGNUP
 import net.simplifiedcoding.ui.theme.AppTheme
 import net.simplifiedcoding.ui.theme.spacing
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SignupScreen() {
+fun SignupScreen(navController: NavHostController) {
     var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -129,11 +134,17 @@ fun SignupScreen() {
 
 
         Text(
-            modifier = Modifier.constrainAs(refTextSignup) {
-                top.linkTo(refButtonSignup.bottom, spacing.medium)
-                start.linkTo(parent.start, spacing.extraLarge)
-                end.linkTo(parent.end, spacing.extraLarge)
-            },
+            modifier = Modifier
+                .constrainAs(refTextSignup) {
+                    top.linkTo(refButtonSignup.bottom, spacing.medium)
+                    start.linkTo(parent.start, spacing.extraLarge)
+                    end.linkTo(parent.end, spacing.extraLarge)
+                }
+                .clickable {
+                    navController.navigate(ROUTE_LOGIN) {
+                        popUpTo(ROUTE_SIGNUP) { inclusive = true }
+                    }
+                },
             text = stringResource(id = R.string.already_have_account),
             style = MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Center,
@@ -147,7 +158,7 @@ fun SignupScreen() {
 @Composable
 fun SignupScreenPreviewLight() {
     AppTheme {
-        SignupScreen()
+        SignupScreen(rememberNavController())
     }
 }
 
@@ -155,6 +166,6 @@ fun SignupScreenPreviewLight() {
 @Composable
 fun SignupScreenPreviewDark() {
     AppTheme {
-        SignupScreen()
+        SignupScreen(rememberNavController())
     }
 }

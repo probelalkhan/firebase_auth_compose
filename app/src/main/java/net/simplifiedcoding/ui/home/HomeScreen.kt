@@ -13,12 +13,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import net.simplifiedcoding.R
 import net.simplifiedcoding.ui.theme.AppTheme
 import net.simplifiedcoding.ui.theme.spacing
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavHostController) {
     val spacing = MaterialTheme.spacing
     Column(
         modifier = Modifier
@@ -109,7 +111,7 @@ fun HomeScreen() {
 @Composable
 fun HomeScreenPreviewLight() {
     AppTheme {
-        HomeScreen()
+        HomeScreen(rememberNavController())
     }
 }
 
@@ -117,6 +119,6 @@ fun HomeScreenPreviewLight() {
 @Composable
 fun HomeScreenPreviewDark() {
     AppTheme {
-        HomeScreen()
+        HomeScreen(rememberNavController())
     }
 }

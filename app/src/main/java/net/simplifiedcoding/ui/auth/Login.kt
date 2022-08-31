@@ -2,6 +2,7 @@ package net.simplifiedcoding.ui.auth
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.wrapContentSize
@@ -17,13 +18,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import net.simplifiedcoding.R
+import net.simplifiedcoding.navigation.ROUTE_LOGIN
+import net.simplifiedcoding.navigation.ROUTE_SIGNUP
 import net.simplifiedcoding.ui.theme.AppTheme
 import net.simplifiedcoding.ui.theme.spacing
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen() {
+fun LoginScreen(navController: NavController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 
@@ -108,11 +113,17 @@ fun LoginScreen() {
 
 
         Text(
-            modifier = Modifier.constrainAs(refTextSignup) {
-                top.linkTo(refButtonLogin.bottom, spacing.medium)
-                start.linkTo(parent.start, spacing.extraLarge)
-                end.linkTo(parent.end, spacing.extraLarge)
-            },
+            modifier = Modifier
+                .constrainAs(refTextSignup) {
+                    top.linkTo(refButtonLogin.bottom, spacing.medium)
+                    start.linkTo(parent.start, spacing.extraLarge)
+                    end.linkTo(parent.end, spacing.extraLarge)
+                }
+                .clickable {
+                    navController.navigate(ROUTE_SIGNUP) {
+                        popUpTo(ROUTE_LOGIN) { inclusive = true }
+                    }
+                },
             text = stringResource(id = R.string.dont_have_account),
             style = MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Center,
@@ -126,7 +137,7 @@ fun LoginScreen() {
 @Composable
 fun LoginScreenPreviewLight() {
     AppTheme {
-        LoginScreen()
+        LoginScreen(rememberNavController())
     }
 }
 
@@ -134,6 +145,6 @@ fun LoginScreenPreviewLight() {
 @Composable
 fun LoginScreenPreviewDark() {
     AppTheme {
-        LoginScreen()
+        LoginScreen(rememberNavController())
     }
 }
