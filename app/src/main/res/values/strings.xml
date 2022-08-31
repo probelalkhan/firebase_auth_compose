@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Firebase Auth\nSample</string>
+    <string name="email">email</string>
+    <string name="password">password</string>
+    <string name="login">login</string>
+    <string name="dont_have_account">Do not have an account?\nClick here to sign up</string>
+    <string name="name">name</string>
+    <string name="signup">signup</string>
+    <string name="already_have_account">Already have an account?\nClick here to login</string>
+    <string name="welcome_back">Welcome Back</string>
+    <string name="empty" />
+    <string name="logout">logout</string>
+</resources>
