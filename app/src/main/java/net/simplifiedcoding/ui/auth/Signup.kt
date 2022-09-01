@@ -14,6 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -110,6 +111,7 @@ fun SignupScreen(navController: NavHostController) {
                 end.linkTo(parent.end, spacing.large)
                 width = Dimension.fillToConstraints
             },
+            visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(
                 capitalization = KeyboardCapitalization.None,
                 autoCorrect = false,
